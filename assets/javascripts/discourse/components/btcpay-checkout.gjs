@@ -17,6 +17,15 @@ import { btcpayText } from "../lib/btcpay-text";
 const POLL_INTERVAL_MS = 10_000;
 const POLL_LIMIT = 60;
 
+// BTCPay's recurringType values; anything else shows as it comes
+const INTERVALS = ["Monthly", "Quarterly", "Yearly", "Lifetime"];
+
+function intervalLabel(interval) {
+  return INTERVALS.includes(interval)
+    ? i18n(`btcpay.checkout.intervals.${interval.toLowerCase()}`)
+    : interval;
+}
+
 let modalScript = null;
 
 function loadModalScript(url) {
@@ -134,6 +143,7 @@ export default class BtcpayCheckout extends Component {
 
       return {
         ...plan,
+        intervalLabel: intervalLabel(plan.interval),
         isCurrent,
         // Downgrades are a later feature; until then they are not selectable
         isBlocked: !isCurrent && cheaper,
@@ -356,6 +366,32 @@ export default class BtcpayCheckout extends Component {
                   {{on "change" (fn this.selectPlan plan.plan_id)}}
                 />
 
+                <span class="btcpay-plan__art" aria-hidden="true">
+                  <svg viewBox="0 0 96 56" focusable="false">
+                    <path
+                      d="M8 4h80a4 4 0 0 1 4 4v12a8 8 0 0 0 0 16v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V36a8 8 0 0 0 0-16V8a4 4 0 0 1 4-4z"
+                      fill="currentColor"
+                      opacity="0.15"
+                    />
+                    <path
+                      d="M8 4h80a4 4 0 0 1 4 4v12a8 8 0 0 0 0 16v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V36a8 8 0 0 0 0-16V8a4 4 0 0 1 4-4z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M68 8v40"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-dasharray="3 4"
+                    />
+                    <path
+                      d="M38 28l-4.7 2.5.9-5.3-3.8-3.7 5.3-.8L38 16l2.3 4.7 5.3.8-3.8 3.7.9 5.3z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+
                 <span class="btcpay-plan__body">
                   <span class="btcpay-plan__header">
                     <span class="btcpay-plan__name">{{plan.label}}</span>
@@ -380,7 +416,7 @@ export default class BtcpayCheckout extends Component {
                       {{#if plan.interval}}
                         <span class="btcpay-plan__interval">
                           /
-                          {{plan.interval}}
+                          {{plan.intervalLabel}}
                         </span>
                       {{/if}}
                     </span>

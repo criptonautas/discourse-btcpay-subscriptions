@@ -178,6 +178,30 @@ describe DiscourseBtcpay::BtcpayCheckoutController do
       )
     end
 
+    it "prefers the plan's description for the viewer's locale" do
+      SiteSetting.default_locale = "es"
+      stub_request(:get, "https://btcpay.example.com/api/v1/stores/store/offerings/off-1")
+        .to_return(
+          status: 200,
+          body: {
+            id: "off-1",
+            plans: [
+              {
+                id: "plan-1",
+                name: "Premium",
+                price: "10",
+                description: "Everything",
+                metadata: { description_es: "Todo el foro" }
+              }
+            ]
+          }.to_json
+        )
+
+      get "/btcpay/plans.json"
+
+      expect(response.parsed_body["plans"].first["description"]).to eq("Todo el foro")
+    end
+
     it "posts a store-scoped body to the top-level plan-checkout endpoint" do
       stub =
         stub_request(:post, "https://btcpay.example.com/api/v1/plan-checkout")

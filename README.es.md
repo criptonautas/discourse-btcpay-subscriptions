@@ -96,6 +96,8 @@ Ve a **Admin → Ajustes** y busca `btcpay`:
 
 Un plan que no resuelva a ningún grupo aparece con un aviso en la página de admin y no se pone a la venta.
 
+**Descripciones por idioma.** Agrega `description_es`, `description_en` (cualquier código de idioma de Discourse) a los metadatos del plan en BTCPay y cada visitante ve la de su idioma; la descripción propia del plan queda como respaldo. Todas admiten Markdown.
+
 ### Insertar los planes en una publicación
 
 Envuelve cualquier cosa en una publicación con el wrap del plugin y el selector de planes se renderiza ahí mismo, para quien lo lee y con su plan actual ya marcado:

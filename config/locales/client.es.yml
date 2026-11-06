@@ -26,6 +26,11 @@ es:
         intro: "Pago en cripto a través de BTCPay Server. El acceso se concede apenas se confirma el pago."
 
       checkout:
+        intervals:
+          monthly: "mes"
+          quarterly: "trimestre"
+          yearly: "año"
+          lifetime: "de por vida"
         trial_days:
           one: "prueba de %{count} día"
           other: "prueba de %{count} días"

@@ -95,6 +95,8 @@ Go to **Admin → Settings** and search for `btcpay`:
 
 A plan that resolves to no group is listed on the admin page with a warning and is not offered for sale.
 
+**Descriptions per language.** Add `description_es`, `description_en` (any Discourse locale code) to the plan's BTCPay metadata and each viewer sees the one for their locale; the plan's own description is the fallback. Markdown works in all of them.
+
 ### Embedding the plans in a post
 
 Wrap anything in a post with the plugin's own wrap and the plan picker renders inline, for the viewer, with their current plan already marked:

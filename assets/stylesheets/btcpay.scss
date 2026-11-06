@@ -171,7 +171,7 @@
 }
 
 .btcpay-page {
-  max-width: 720px;
+  max-width: 880px;
   margin: 0 auto;
   padding: 1.5em 1em;
 
@@ -201,14 +201,17 @@
   margin: 1.5em 0;
 }
 
+// Side by side on desktop, one column on a phone
 .btcpay-plans {
   display: grid;
-  gap: 0.75em;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1em;
   margin: 0 0 1.25em;
   padding: 0;
   border: none;
 
   &__legend {
+    grid-column: 1 / -1;
     padding: 0;
     margin-bottom: 0.75em;
     font-weight: bold;
@@ -217,10 +220,11 @@
 }
 
 .btcpay-plan {
+  position: relative;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 0.75em;
-  padding: 1em;
+  padding: 1.25em;
   border: 1px solid var(--primary-low);
   border-radius: var(--d-border-radius, 0.5em);
   background: var(--secondary);
@@ -254,9 +258,32 @@
     cursor: not-allowed;
   }
 
+  // The whole card is the control; the radio stays for keyboard and
+  // screen readers, and :focus-within draws the ring.
   &__radio {
-    margin: 0.2em 0 0;
-    flex: 0 0 auto;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__art {
+    color: var(--primary-low-mid);
+    transition: color 0.15s ease;
+
+    svg {
+      display: block;
+      width: 4.5em;
+      height: auto;
+    }
+  }
+
+  &:hover:not(.is-blocked, .is-current) &__art,
+  &.is-selected &__art {
+    color: var(--tertiary);
+  }
+
+  &.is-current &__art {
+    color: var(--success);
   }
 
   &__body {
