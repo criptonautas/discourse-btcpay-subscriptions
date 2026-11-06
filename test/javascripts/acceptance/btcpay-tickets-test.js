@@ -52,6 +52,14 @@ acceptance("BTCPay | Tickets page", function (needs) {
       .hasText("10 USD");
   });
 
+  test("translates BTCPay's billing interval", async function (assert) {
+    await visit("/tickets");
+
+    assert
+      .dom(".btcpay-plan:first-of-type .btcpay-plan__interval")
+      .hasText("/ month");
+  });
+
   test("shows the checkout button", async function (assert) {
     await visit("/tickets");
 

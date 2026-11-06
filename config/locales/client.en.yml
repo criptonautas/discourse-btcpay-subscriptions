@@ -26,6 +26,11 @@ en:
         intro: "Pay with crypto through BTCPay Server. Access is granted as soon as the payment settles."
 
       checkout:
+        intervals:
+          monthly: "month"
+          quarterly: "quarter"
+          yearly: "year"
+          lifetime: "lifetime"
         trial_days:
           one: "%{count}-day trial"
           other: "%{count}-day trial"

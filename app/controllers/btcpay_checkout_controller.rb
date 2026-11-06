@@ -135,6 +135,12 @@ module DiscourseBtcpay
           group_name = DiscourseBtcpay.group_for_plan(plan_id, plan: plan)
           next if group_name.blank?
 
+          # A "description_es" / "description_en" metadata key on the plan wins
+          # for that locale; BTCPay's own description is the fallback.
+          description =
+            plan.dig("metadata", "description_#{I18n.locale}").presence ||
+              plan["description"]
+
           {
             plan_id: plan_id,
             label: DiscourseBtcpay.label_for_plan(plan_id, plan: plan),
@@ -142,10 +148,10 @@ module DiscourseBtcpay
             price: plan["price"],
             currency: plan["currency"],
             interval: plan["recurringType"],
-            description: plan["description"],
+            description: description,
             # BTCPay stores the description as plain text; run it through
             # Discourse's own markdown + sanitizer so bold, links and lists work
-            description_html: cooked(plan["description"]),
+            description_html: cooked(description),
             trial_days: plan["trialDays"]
           }
         end
