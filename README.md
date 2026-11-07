@@ -1,6 +1,6 @@
 # discourse-btcpay-subscriptions
 
-[![Linting and Tests](https://github.com/somos-criptonautas/discourse-btcpay-subscriptions/actions/workflows/plugin-linting-and-tests.yml/badge.svg)](https://github.com/somos-criptonautas/discourse-btcpay-subscriptions/actions/workflows/plugin-linting-and-tests.yml)
+[![Linting and Tests](https://github.com/criptonautas/discourse-btcpay-subscriptions/actions/workflows/plugin-linting-and-tests.yml/badge.svg)](https://github.com/criptonautas/discourse-btcpay-subscriptions/actions/workflows/plugin-linting-and-tests.yml)
 
 **ENGLISH** | [ESPAÑOL](README.es.md)
 
@@ -41,7 +41,7 @@ hooks:
         cd: $home/plugins
         cmd:
           - git clone https://github.com/discourse/docker_manager.git
-          - git clone https://github.com/somos-criptonautas/discourse-btcpay-subscriptions.git
+          - git clone https://github.com/criptonautas/discourse-btcpay-subscriptions.git
 ```
 
 Rebuild Discourse:
@@ -344,7 +344,7 @@ DELETE FROM plugin_store_rows WHERE plugin_name = 'discourse-btcpay-subscription
 
 Records belonging to a **deleted user** are removed automatically when Discourse destroys the account.
 
-**Support:** open an issue at https://github.com/somos-criptonautas/discourse-btcpay-subscriptions/issues with your Discourse and BTCPay versions, the relevant `/logs` entries (search `DiscourseBtcpay`), and the BTCPay webhook delivery log for the event in question.
+**Support:** open an issue at https://github.com/criptonautas/discourse-btcpay-subscriptions/issues with your Discourse and BTCPay versions, the relevant `/logs` entries (search `DiscourseBtcpay`), and the BTCPay webhook delivery log for the event in question.
 
 ## Troubleshooting
 

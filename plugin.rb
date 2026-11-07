@@ -4,7 +4,7 @@
 # about: BTCPay Server subscription integration for Discourse
 # version: 1.0.0
 # authors: Criptonautas
-# url: https://github.com/somos-criptonautas/discourse-btcpay-subscriptions
+# url: https://github.com/criptonautas/discourse-btcpay-subscriptions
 # required_version: 3.4.0
 
 enabled_site_setting :btcpay_enabled
