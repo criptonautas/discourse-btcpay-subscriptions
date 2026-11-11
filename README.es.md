@@ -86,6 +86,7 @@ Ve a **Admin → Ajustes** y busca `btcpay`:
 | `btcpay_anonymous_checkout` | Opcional: permitir comprar sin sesión |
 | `btcpay_card_payments` | Opcional: añade un botón "Pagar con tarjeta" (requiere el plugin Stripe de BTCPay) |
 | `btcpay_button_label` | vacío (usa la traducción) |
+| `btcpay_card_button_label` | vacío (usa la traducción) |
 | `btcpay_reconcile_interval_hours` | `4` |
 
 **Los planes no necesitan configuración.** Todos los planes de la oferta se obtienen de BTCPay con su precio en vivo, y cada uno concede un grupo de Discourse resuelto en este orden:
@@ -118,7 +119,7 @@ la página.
 
 Todos los textos visibles están traducidos (el plugin incluye inglés y español) y se pueden sobrescribir de dos formas:
 
-- **Ajustes del sitio** para los textos principales: `btcpay_button_label`, `btcpay_tickets_title`, `btcpay_tickets_intro`, `btcpay_billing_title`, `btcpay_billing_intro`, `btcpay_nav_label`. Si los dejas vacíos se usa la traducción del idioma de cada usuario; si los rellenas, ese texto se muestra a todo el mundo.
+- **Ajustes del sitio** para los textos principales: `btcpay_button_label`, `btcpay_card_button_label`, `btcpay_tickets_title`, `btcpay_tickets_intro`, `btcpay_billing_title`, `btcpay_billing_intro`, `btcpay_nav_label`. Si los dejas vacíos se usa la traducción del idioma de cada usuario; si los rellenas, ese texto se muestra a todo el mundo.
 - **Admin → Personalizar → Texto** para cualquier otro texto, incluidas versiones por idioma. Busca `btcpay.` para ver todas las claves.
 
 ### 4. Configuración de Nginx

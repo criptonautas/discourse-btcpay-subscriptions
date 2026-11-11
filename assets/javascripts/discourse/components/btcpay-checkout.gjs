@@ -133,6 +133,14 @@ export default class BtcpayCheckout extends Component {
     );
   }
 
+  get cardButtonLabel() {
+    return btcpayText(
+      this.siteSettings,
+      "btcpay_card_button_label",
+      "btcpay.checkout.card_label"
+    );
+  }
+
   // Each plan carries how it relates to what the user already has
   get offers() {
     return this.plans.map((plan) => {
@@ -480,7 +488,7 @@ export default class BtcpayCheckout extends Component {
                   disabled={{or this.loading (not this.selectedPlan)}}
                   {{on "click" (fn this.checkout "card")}}
                 >
-                  {{i18n "btcpay.checkout.card_label"}}
+                  {{this.cardButtonLabel}}
                 </button>
               {{/if}}
             {{/if}}

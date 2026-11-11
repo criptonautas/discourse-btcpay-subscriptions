@@ -219,14 +219,18 @@
   }
 }
 
+// Ticket and name share the top row; everything else runs full width below,
+// anchored to the top so a short description leaves space at the bottom only.
 .btcpay-plan {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75em;
-  padding: 1.25em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  align-items: center;
+  gap: 0.75em 0.875em;
+  padding: 1.25em 1.5em 1.5em;
   border: 1px solid var(--primary-low);
-  border-radius: var(--d-border-radius, 0.5em);
+  border-radius: 0.75em;
   background: var(--secondary);
   cursor: pointer;
   transition:
@@ -272,7 +276,7 @@
 
     svg {
       display: block;
-      width: 4.5em;
+      width: 2.75em;
       height: auto;
     }
   }
@@ -286,12 +290,9 @@
     color: var(--success);
   }
 
+  // Its children join the card's grid, so the header sits beside the ticket
   &__body {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.25em 1em;
-    flex: 1 1 auto;
-    min-width: 0;
+    display: contents;
 
     > * {
       grid-column: 1 / -1;
@@ -299,24 +300,24 @@
   }
 
   &__header {
-    grid-column: 1;
+    grid-column: 2;
     display: flex;
     align-items: center;
     gap: 0.5em;
     flex-wrap: wrap;
+    min-width: 0;
   }
 
   // Prices line up down the right edge, so plans compare at a glance.
   &__price {
-    grid-column: 2;
-    grid-row: 1;
-    text-align: end;
+    justify-self: end;
     white-space: nowrap;
   }
 
   &__name {
     font-size: var(--font-up-1);
-    font-weight: bold;
+    font-weight: 600;
+    line-height: 1.2;
     color: var(--primary);
   }
 
@@ -339,8 +340,10 @@
   }
 
   &__amount {
-    font-size: var(--font-up-1);
-    font-weight: bold;
+    font-size: var(--font-up-3);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
     color: var(--primary);
   }
 
@@ -349,6 +352,18 @@
   &__note {
     color: var(--primary-medium);
     font-size: var(--font-down-1);
+  }
+
+  &__description {
+    line-height: 1.5;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__trial {
@@ -408,4 +423,9 @@
 .btcpay-plan-warning {
   color: var(--danger);
   font-size: var(--font-down-2);
+}
+
+// Billing goes straight to the plan; the profile tabs stay for navigation
+.btcpay-billing-route .user-main > .about {
+  display: none;
 }

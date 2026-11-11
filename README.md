@@ -86,6 +86,7 @@ Go to **Admin → Settings** and search for `btcpay`:
 | `btcpay_anonymous_checkout` | Optional: let logged-out visitors buy |
 | `btcpay_card_payments` | Optional: add a "Pay with card" button (needs BTCPay's Stripe plugin) |
 | `btcpay_button_label` | blank (uses the translation) |
+| `btcpay_card_button_label` | blank (uses the translation) |
 
 **Plans need no configuration.** Every plan in the offering is fetched from BTCPay with its live price, and each one grants a Discourse group resolved in this order:
 
@@ -116,7 +117,7 @@ on your forum, or embed the picker in a pinned topic and skip the page.
 
 Every user-facing string is translated (English and Spanish ship with the plugin) and can be overridden two ways:
 
-- **Site settings** for the headline strings — `btcpay_button_label`, `btcpay_tickets_title`, `btcpay_tickets_intro`, `btcpay_billing_title`, `btcpay_billing_intro`, `btcpay_nav_label`. Leave one blank and the translation for each viewer's locale is used; fill it in and that exact text is shown to everyone.
+- **Site settings** for the headline strings — `btcpay_button_label`, `btcpay_card_button_label`, `btcpay_tickets_title`, `btcpay_tickets_intro`, `btcpay_billing_title`, `btcpay_billing_intro`, `btcpay_nav_label`. Leave one blank and the translation for each viewer's locale is used; fill it in and that exact text is shown to everyone.
 - **Admin → Customize → Text** for anything else, including per-locale overrides. Search for `btcpay.` to find every key.
 
 ### 4. Nginx Configuration

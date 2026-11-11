@@ -124,7 +124,11 @@ acceptance("BTCPay | Tickets page when disabled", function (needs) {
 
 acceptance("BTCPay | Tickets page with card payments", function (needs) {
   needs.user();
-  needs.settings({ btcpay_enabled: true, btcpay_card_payments: true });
+  needs.settings({
+    btcpay_enabled: true,
+    btcpay_card_payments: true,
+    btcpay_card_button_label: "abonar con tarjeta",
+  });
 
   let checkoutBody;
 
@@ -140,7 +144,7 @@ acceptance("BTCPay | Tickets page with card payments", function (needs) {
   test("offers a card button that asks for a card checkout", async function (assert) {
     await visit("/tickets");
 
-    assert.dom(".btcpay-card-btn").exists();
+    assert.dom(".btcpay-card-btn").hasText("abonar con tarjeta");
 
     await click(".btcpay-plan:first-of-type .btcpay-plan__radio");
     await click(".btcpay-card-btn");
