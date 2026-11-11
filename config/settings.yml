@@ -56,6 +56,10 @@ btcpay:
     default: ""
     client: true
     description: "Payment button text. Blank uses the translated default."
+  btcpay_card_button_label:
+    default: ""
+    client: true
+    description: "Card payment button text. Blank uses the translated default."
   btcpay_tickets_title:
     default: ""
     client: true

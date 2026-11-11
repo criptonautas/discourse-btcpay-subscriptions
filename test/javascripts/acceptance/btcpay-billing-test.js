@@ -53,6 +53,9 @@ acceptance("BTCPay | Billing page", function (needs) {
     await visit("/u/eviltrout/billing");
 
     assert.dom(".btcpay-sub-card").hasClass("btcpay-status-active");
+    assert
+      .dom(".user-main > .about")
+      .isNotVisible("the profile header steps aside on billing");
     assert.dom(".btcpay-payments-table tbody tr").exists({ count: 1 });
     assert.dom(".btcpay-payments-table tbody td:nth-child(3)").hasText("XMR");
     assert

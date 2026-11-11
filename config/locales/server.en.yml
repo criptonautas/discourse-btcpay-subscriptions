@@ -16,6 +16,7 @@ en:
     btcpay_send_email: "Send the buyer's email to BTCPay (skips the email prompt at checkout)"
     btcpay_default_group: "Default group for plans with no group of their own"
     btcpay_button_label: "Payment button text (blank = translated default)"
+    btcpay_card_button_label: "Card payment button text (blank = translated default)"
     btcpay_tickets_title: "Heading on /tickets (blank = translated default)"
     btcpay_tickets_intro: "Intro on /tickets (blank = translated default)"
     btcpay_billing_title: "Heading on the profile billing tab (blank = translated default)"

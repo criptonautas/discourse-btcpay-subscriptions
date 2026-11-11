@@ -16,6 +16,7 @@ es:
     btcpay_send_email: "Enviar el email de quien compra a BTCPay (evita pedirlo en el checkout)"
     btcpay_default_group: "Grupo por defecto para los planes que no tengan uno propio"
     btcpay_button_label: "Texto del botón de pago (vacío = traducción por defecto)"
+    btcpay_card_button_label: "Texto del botón de pago con tarjeta (vacío = traducción por defecto)"
     btcpay_tickets_title: "Título de /tickets (vacío = traducción por defecto)"
     btcpay_tickets_intro: "Introducción de /tickets (vacío = traducción por defecto)"
     btcpay_billing_title: "Título de la pestaña de facturación (vacío = traducción por defecto)"
