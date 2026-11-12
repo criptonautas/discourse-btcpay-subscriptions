@@ -122,7 +122,7 @@ en:
     errors:
       not_enabled: "BTCPay integration is not enabled."
       missing_config: "BTCPay Server is not fully configured."
-      plans_closed: "Subscriptions aren't open yet."
+      plans_closed: "Tickets aren't available yet."
       plan_not_found: "The requested plan was not found."
       downgrade_unsupported: "Changing to a cheaper plan is not supported yet."
       donation_too_small: "The smallest donation is %{minimum} %{currency}."

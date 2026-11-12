@@ -26,7 +26,7 @@ en:
         intro: "Pay with crypto through BTCPay Server. Access is granted as soon as the payment settles."
 
       checkout:
-        closed: "Subscriptions open soon. We'll announce it in the community when they're available."
+        closed: "Our tickets are paused for now. We'll announce it in the community when they're available again."
         intervals:
           monthly: "month"
           quarterly: "quarter"
