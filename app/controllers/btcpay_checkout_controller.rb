@@ -6,6 +6,7 @@ module DiscourseBtcpay
 
     before_action :ensure_can_buy
     before_action :ensure_btcpay_configured
+    before_action :ensure_plans_open, only: :create
 
     # POST /btcpay/checkout
     # Body: { plan_id: "xxx", payment_method: "card" (optional) }
@@ -129,6 +130,8 @@ module DiscourseBtcpay
     # The offering is the catalogue: every plan BTCPay lists is offered, as
     # long as it resolves to a Discourse group.
     def plans
+      return render json: { plans: [], closed: true } unless plans_open?
+
       plans =
         DiscourseBtcpay.remote_plans.filter_map do |plan|
           plan_id = plan["id"]
@@ -205,6 +208,17 @@ module DiscourseBtcpay
       return if SiteSetting.btcpay_anonymous_checkout && action_name != "status"
 
       ensure_logged_in
+    end
+
+    # Closed until a launch: the plans stay in BTCPay and staff can still test
+    def plans_open?
+      SiteSetting.btcpay_plans_open || current_user&.staff?
+    end
+
+    def ensure_plans_open
+      return if plans_open?
+
+      render json: { error: I18n.t("discourse_btcpay.errors.plans_closed") }, status: :forbidden
     end
 
     def ensure_btcpay_configured
