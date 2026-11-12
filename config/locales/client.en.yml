@@ -26,6 +26,7 @@ en:
         intro: "Pay with crypto through BTCPay Server. Access is granted as soon as the payment settles."
 
       checkout:
+        per_day: "%{amount} %{currency} per day"
         intervals:
           monthly: "month"
           quarterly: "quarter"

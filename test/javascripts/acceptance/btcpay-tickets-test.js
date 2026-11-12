@@ -19,7 +19,7 @@ const PLANS = {
       group_name: "vip",
       price: "25",
       currency: "USD",
-      interval: "Monthly",
+      interval: "Lifetime",
     },
   ],
 };
@@ -58,6 +58,15 @@ acceptance("BTCPay | Tickets page", function (needs) {
     assert
       .dom(".btcpay-plan:first-of-type .btcpay-plan__interval")
       .hasText("/ month");
+  });
+
+  test("shows a rough per-day price, none for lifetime", async function (assert) {
+    await visit("/tickets");
+
+    assert
+      .dom(".btcpay-plan:first-of-type .btcpay-plan__per-day")
+      .hasText("<1 USD per day");
+    assert.dom(".btcpay-plan__per-day").exists({ count: 1 });
   });
 
   test("shows the checkout button", async function (assert) {

@@ -94,7 +94,6 @@
 
   .btcpay-no-sub {
     color: var(--primary-medium);
-    font-style: italic;
   }
 }
 
@@ -212,6 +211,7 @@
 
   &__legend {
     grid-column: 1 / -1;
+    text-align: end;
     padding: 0;
     margin-bottom: 0.75em;
     font-weight: bold;
@@ -219,16 +219,12 @@
   }
 }
 
-// Ticket and name share a centered top row, the price sits centered below and
-// the description keeps a left edge. Anchored to the top, so a short
-// description leaves space at the bottom only.
+// Ticket and name share a centered top row, the description keeps a left
+// edge, and the price sits at the bottom so it lines up across cards.
 .btcpay-plan {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto auto 1fr;
-  align-content: start;
-  align-items: center;
-  gap: 0.75em 0.875em;
+  display: flex;
+  flex-direction: column;
   padding: 1.25em 1.5em 1.5em;
   border: 1px solid var(--primary-low);
   border-radius: 0.75em;
@@ -273,7 +269,7 @@
   }
 
   &__art {
-    grid-column: 2;
+    flex: 0 0 auto;
     color: var(--primary-low-mid);
     transition: color 0.15s ease;
 
@@ -293,17 +289,21 @@
     color: var(--success);
   }
 
-  // Its children join the card's grid, so the header sits beside the ticket
   &__body {
-    display: contents;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 0.75em;
+  }
 
-    > * {
-      grid-column: 1 / -1;
-    }
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.875em;
   }
 
   &__header {
-    grid-column: 3;
     display: flex;
     align-items: center;
     gap: 0.5em;
@@ -312,7 +312,9 @@
   }
 
   &__price {
-    justify-self: center;
+    margin-top: auto;
+    padding-top: 0.5em;
+    text-align: center;
     white-space: nowrap;
   }
 
@@ -368,8 +370,15 @@
     }
   }
 
+  &__per-day {
+    margin-top: -0.5em;
+    text-align: center;
+    color: var(--primary-medium);
+    font-size: var(--font-down-2);
+  }
+
   &__trial {
-    justify-self: start;
+    align-self: flex-start;
     padding: 0.15em 0.5em;
     border-radius: var(--d-border-radius, 0.25em);
     background: var(--tertiary-low);
