@@ -27,6 +27,7 @@ en:
 
       checkout:
         closed: "Our tickets are paused for now. We'll announce it in the community when they're available again."
+        per_day: "%{amount} %{currency} per day"
         intervals:
           monthly: "month"
           quarterly: "quarter"
