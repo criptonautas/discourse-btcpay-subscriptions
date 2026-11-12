@@ -26,6 +26,22 @@ function intervalLabel(interval) {
     : interval;
 }
 
+// Days per BTCPay interval, for the rough per-day price; Lifetime has none
+const DAYS = { Monthly: 30, Quarterly: 91, Yearly: 365 };
+
+function perDayLabel(plan) {
+  const days = DAYS[plan.interval];
+  const perDay = parseFloat(plan.price) / days;
+  if (!days || !(perDay > 0)) {
+    return null;
+  }
+
+  return i18n("btcpay.checkout.per_day", {
+    amount: perDay < 1 ? "<1" : `~${Math.round(perDay)}`,
+    currency: plan.currency,
+  });
+}
+
 let modalScript = null;
 
 function loadModalScript(url) {
@@ -152,6 +168,7 @@ export default class BtcpayCheckout extends Component {
       return {
         ...plan,
         intervalLabel: intervalLabel(plan.interval),
+        perDayLabel: perDayLabel(plan),
         isCurrent,
         // Downgrades are a later feature; until then they are not selectable
         isBlocked: !isCurrent && cheaper,
@@ -374,61 +391,48 @@ export default class BtcpayCheckout extends Component {
                   {{on "change" (fn this.selectPlan plan.plan_id)}}
                 />
 
-                <span class="btcpay-plan__art" aria-hidden="true">
-                  <svg viewBox="0 0 96 56" focusable="false">
-                    <path
-                      d="M8 4h80a4 4 0 0 1 4 4v12a8 8 0 0 0 0 16v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V36a8 8 0 0 0 0-16V8a4 4 0 0 1 4-4z"
-                      fill="currentColor"
-                      opacity="0.15"
-                    />
-                    <path
-                      d="M8 4h80a4 4 0 0 1 4 4v12a8 8 0 0 0 0 16v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V36a8 8 0 0 0 0-16V8a4 4 0 0 1 4-4z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <path
-                      d="M68 8v40"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-dasharray="3 4"
-                    />
-                    <path
-                      d="M38 28l-4.7 2.5.9-5.3-3.8-3.7 5.3-.8L38 16l2.3 4.7 5.3.8-3.8 3.7.9 5.3z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-
                 <span class="btcpay-plan__body">
-                  <span class="btcpay-plan__header">
-                    <span class="btcpay-plan__name">{{plan.label}}</span>
+                  <span class="btcpay-plan__top">
+                    <span class="btcpay-plan__art" aria-hidden="true">
+                      <svg viewBox="0 0 96 56" focusable="false">
+                        <path
+                          d="M8 4h80a4 4 0 0 1 4 4v12a8 8 0 0 0 0 16v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V36a8 8 0 0 0 0-16V8a4 4 0 0 1 4-4z"
+                          fill="currentColor"
+                          opacity="0.15"
+                        />
+                        <path
+                          d="M8 4h80a4 4 0 0 1 4 4v12a8 8 0 0 0 0 16v12a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V36a8 8 0 0 0 0-16V8a4 4 0 0 1 4-4z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        />
+                        <path
+                          d="M68 8v40"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-dasharray="3 4"
+                        />
+                        <path
+                          d="M38 28l-4.7 2.5.9-5.3-3.8-3.7 5.3-.8L38 16l2.3 4.7 5.3.8-3.8 3.7.9 5.3z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
 
-                    {{#if plan.isCurrent}}
-                      <span class="btcpay-plan__badge --current">
-                        {{i18n "btcpay.checkout.current_plan"}}
-                      </span>
-                    {{else if plan.isUpgrade}}
-                      <span class="btcpay-plan__badge --upgrade">
-                        {{i18n "btcpay.checkout.upgrade"}}
-                      </span>
-                    {{/if}}
-                  </span>
+                    <span class="btcpay-plan__header">
+                      <span class="btcpay-plan__name">{{plan.label}}</span>
 
-                  {{#if plan.price}}
-                    <span class="btcpay-plan__price">
-                      <span class="btcpay-plan__amount">
-                        {{plan.price}}
-                        {{plan.currency}}
-                      </span>
-                      {{#if plan.interval}}
-                        <span class="btcpay-plan__interval">
-                          /
-                          {{plan.intervalLabel}}
+                      {{#if plan.isCurrent}}
+                        <span class="btcpay-plan__badge --current">
+                          {{i18n "btcpay.checkout.current_plan"}}
+                        </span>
+                      {{else if plan.isUpgrade}}
+                        <span class="btcpay-plan__badge --upgrade">
+                          {{i18n "btcpay.checkout.upgrade"}}
                         </span>
                       {{/if}}
                     </span>
-                  {{/if}}
+                  </span>
 
                   {{#if plan.description_html}}
                     <span class="btcpay-plan__description cooked">
@@ -452,6 +456,27 @@ export default class BtcpayCheckout extends Component {
                   {{#if plan.isBlocked}}
                     <span class="btcpay-plan__note">
                       {{i18n "btcpay.checkout.downgrade_unavailable"}}
+                    </span>
+                  {{/if}}
+
+                  {{#if plan.price}}
+                    <span class="btcpay-plan__price">
+                      <span class="btcpay-plan__amount">
+                        {{plan.price}}
+                        {{plan.currency}}
+                      </span>
+                      {{#if plan.interval}}
+                        <span class="btcpay-plan__interval">
+                          /
+                          {{plan.intervalLabel}}
+                        </span>
+                      {{/if}}
+                    </span>
+                  {{/if}}
+
+                  {{#if plan.perDayLabel}}
+                    <span class="btcpay-plan__per-day">
+                      {{plan.perDayLabel}}
                     </span>
                   {{/if}}
                 </span>
