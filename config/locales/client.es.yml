@@ -26,6 +26,7 @@ es:
         intro: "Pago en cripto a través de BTCPay Server. El acceso se concede apenas se confirma el pago."
 
       checkout:
+        closed: "Las suscripciones abren pronto. Avisamos en la comunidad cuando estén disponibles."
         intervals:
           monthly: "mes"
           quarterly: "trimestre"

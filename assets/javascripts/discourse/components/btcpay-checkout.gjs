@@ -68,6 +68,7 @@ export default class BtcpayCheckout extends Component {
   @tracked currentPrice = null;
   @tracked progress = null;
   @tracked currentLoaded = false;
+  @tracked closed = false;
 
   pollTimer = null;
   pollCount = 0;
@@ -179,6 +180,7 @@ export default class BtcpayCheckout extends Component {
     try {
       const result = await ajax("/btcpay/plans");
       this.plans = result.plans || [];
+      this.closed = !!result.closed;
     } catch (e) {
       this.error = extractError(e);
     }
@@ -205,6 +207,14 @@ export default class BtcpayCheckout extends Component {
   @action
   selectPlan(planId) {
     this.selectedPlan = planId;
+  }
+
+  get closedText() {
+    return btcpayText(
+      this.siteSettings,
+      "btcpay_closed_text",
+      "btcpay.checkout.closed"
+    );
   }
 
   get cardEnabled() {
@@ -494,7 +504,9 @@ export default class BtcpayCheckout extends Component {
             {{/if}}
           </div>
         {{else}}
-          <p class="btcpay-no-plans">{{i18n "btcpay.checkout.no_plans"}}</p>
+          <p class="btcpay-no-plans">
+            {{if this.closed this.closedText (i18n "btcpay.checkout.no_plans")}}
+          </p>
         {{/if}}
 
         {{#if this.error}}

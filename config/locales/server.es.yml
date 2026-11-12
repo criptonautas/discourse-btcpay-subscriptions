@@ -12,6 +12,8 @@ es:
     btcpay_donation_min: "Donación mínima"
     btcpay_donation_points: "Puntos de gamificación por unidad donada (0 = desactivado)"
     btcpay_anonymous_checkout: "Permitir comprar sin sesión iniciada (la invitación llega por email al pagar)"
+    btcpay_plans_open: "Abrir las suscripciones (apagado: los planes se ocultan y solo el staff puede comprar)"
+    btcpay_closed_text: "Texto cuando las suscripciones están cerradas (vacío = traducción por defecto)"
     btcpay_card_payments: "Ofrecer pago con tarjeta mediante el plugin Stripe de BTCPay"
     btcpay_send_email: "Enviar el email de quien compra a BTCPay (evita pedirlo en el checkout)"
     btcpay_default_group: "Grupo por defecto para los planes que no tengan uno propio"
@@ -119,6 +121,7 @@ es:
     errors:
       not_enabled: "La integración con BTCPay no está activada."
       missing_config: "BTCPay Server no está configurado por completo."
+      plans_closed: "Las suscripciones todavía no están abiertas."
       plan_not_found: "No se encontró el plan solicitado."
       downgrade_unsupported: "Todavía no se admite el cambio a un plan más barato."
       donation_too_small: "La donación mínima es %{minimum} %{currency}."

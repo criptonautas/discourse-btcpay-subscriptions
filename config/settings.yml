@@ -41,6 +41,10 @@ btcpay:
     default: false
     client: true
     description: "Let logged-out visitors buy. They enter their email at BTCPay and are invited to the forum when the payment settles."
+  btcpay_plans_open:
+    default: true
+    client: true
+    description: "Open subscriptions. Off hides the plans and blocks new purchases; staff can still see and buy them."
   btcpay_card_payments:
     default: false
     client: true
@@ -60,6 +64,10 @@ btcpay:
     default: ""
     client: true
     description: "Card payment button text. Blank uses the translated default."
+  btcpay_closed_text:
+    default: ""
+    client: true
+    description: "Text shown while subscriptions are closed. Blank uses the translated default."
   btcpay_tickets_title:
     default: ""
     client: true

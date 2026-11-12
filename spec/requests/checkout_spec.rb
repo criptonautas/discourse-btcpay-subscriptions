@@ -74,6 +74,41 @@ describe DiscourseBtcpay::BtcpayCheckoutController do
   context "when logged in" do
     before { sign_in(user) }
 
+    context "when subscriptions are closed" do
+      before do
+        SiteSetting.btcpay_plans_open = false
+        stub_request(:get, "https://btcpay.example.com/api/v1/stores/store/offerings/off-1")
+          .to_return(
+            status: 200,
+            body: { id: "off-1", plans: [{ id: "plan-1", name: "Premium", price: "10" }] }.to_json
+          )
+      end
+
+      it "lists no plans and says they are closed" do
+        get "/btcpay/plans.json"
+
+        expect(response.parsed_body["plans"]).to eq([])
+        expect(response.parsed_body["closed"]).to eq(true)
+      end
+
+      it "refuses a checkout" do
+        post "/btcpay/checkout.json", params: { plan_id: "plan-1" }
+
+        expect(response.status).to eq(403)
+        expect(response.parsed_body["error"]).to eq(
+          I18n.t("discourse_btcpay.errors.plans_closed")
+        )
+      end
+
+      it "still shows the plans to staff" do
+        user.update!(admin: true)
+
+        get "/btcpay/plans.json"
+
+        expect(response.parsed_body["plans"].map { |p| p["plan_id"] }).to eq(["plan-1"])
+      end
+    end
+
     it "refuses when the offering is not configured" do
       SiteSetting.btcpay_offering_id = ""
 

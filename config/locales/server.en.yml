@@ -12,6 +12,8 @@ en:
     btcpay_donation_min: "Minimum donation"
     btcpay_donation_points: "Gamification points per unit donated (0 = off)"
     btcpay_anonymous_checkout: "Allow logged-out visitors to buy (they are invited by email once paid)"
+    btcpay_plans_open: "Open subscriptions (off: plans are hidden and only staff can buy)"
+    btcpay_closed_text: "Text shown while subscriptions are closed (blank = translated default)"
     btcpay_card_payments: "Offer card payments through the BTCPay Stripe plugin"
     btcpay_send_email: "Send the buyer's email to BTCPay (skips the email prompt at checkout)"
     btcpay_default_group: "Default group for plans with no group of their own"
@@ -120,6 +122,7 @@ en:
     errors:
       not_enabled: "BTCPay integration is not enabled."
       missing_config: "BTCPay Server is not fully configured."
+      plans_closed: "Subscriptions aren't open yet."
       plan_not_found: "The requested plan was not found."
       downgrade_unsupported: "Changing to a cheaper plan is not supported yet."
       donation_too_small: "The smallest donation is %{minimum} %{currency}."
