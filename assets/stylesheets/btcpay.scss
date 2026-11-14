@@ -444,3 +444,14 @@
 .btcpay-billing-route .user-main > .about {
   display: none;
 }
+
+// BTCPay POS iframe: the <BtcpayPos> component, or [wrap=btcpay-pos] in a post.
+// BTCPay never reports its height, so the box is fixed.
+.btcpay-pos,
+[data-wrap="btcpay-pos"] iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 45rem;
+  border: 0;
+}

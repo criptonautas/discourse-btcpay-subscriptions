@@ -4,6 +4,7 @@ btcpay:
     client: true
   btcpay_server_url:
     default: ""
+    client: true
     description: "BTCPay Server URL (e.g. https://btcpay.yourdomain.com)"
   btcpay_api_key:
     default: ""

@@ -9,6 +9,9 @@ en:
     btcpay:
       loading: "Loading…"
 
+      pos:
+        title: "BTCPay point of sale"
+
       payment_status:
         settled: "settled"
         credited: "credited"
