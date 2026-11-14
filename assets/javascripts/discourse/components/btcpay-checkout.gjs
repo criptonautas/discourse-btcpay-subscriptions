@@ -29,16 +29,24 @@ function intervalLabel(interval) {
 // Days per BTCPay interval, for the rough per-day price; Lifetime has none
 const DAYS = { Monthly: 30, Quarterly: 91, Yearly: 365 };
 
-function perDayLabel(plan) {
-  const days = DAYS[plan.interval];
-  const perDay = parseFloat(plan.price) / days;
-  if (!days || !(perDay > 0)) {
+// "quarterly (~2 per day)", or just the interval when there is no per-day
+function cadenceLabel(plan) {
+  if (!plan.interval) {
     return null;
   }
 
-  return i18n("btcpay.checkout.per_day", {
-    amount: perDay < 1 ? "<1" : `~${Math.round(perDay)}`,
-    currency: plan.currency,
+  const interval = intervalLabel(plan.interval);
+  const days = DAYS[plan.interval];
+  const perDay = parseFloat(plan.price) / days;
+  if (!days || !(perDay > 0)) {
+    return interval;
+  }
+
+  return i18n("btcpay.checkout.cadence", {
+    interval,
+    per_day: i18n("btcpay.checkout.per_day", {
+      amount: perDay < 1 ? "<1" : `~${Math.round(perDay)}`,
+    }),
   });
 }
 
@@ -168,8 +176,7 @@ export default class BtcpayCheckout extends Component {
 
       return {
         ...plan,
-        intervalLabel: intervalLabel(plan.interval),
-        perDayLabel: perDayLabel(plan),
+        cadenceLabel: cadenceLabel(plan),
         isCurrent,
         // Downgrades are a later feature; until then they are not selectable
         isBlocked: !isCurrent && cheaper,
@@ -430,7 +437,12 @@ export default class BtcpayCheckout extends Component {
                     </span>
 
                     <span class="btcpay-plan__header">
-                      <span class="btcpay-plan__name">{{plan.label}}</span>
+                      {{! A label may only hold phrasing content, so no h3 }}
+                      <span
+                        class="btcpay-plan__name"
+                        role="heading"
+                        aria-level="3"
+                      >{{plan.label}}</span>
 
                       {{#if plan.isCurrent}}
                         <span class="btcpay-plan__badge --current">
@@ -475,18 +487,11 @@ export default class BtcpayCheckout extends Component {
                         {{plan.price}}
                         {{plan.currency}}
                       </span>
-                      {{#if plan.interval}}
-                        <span class="btcpay-plan__interval">
-                          /
-                          {{plan.intervalLabel}}
+                      {{#if plan.cadenceLabel}}
+                        <span class="btcpay-plan__cadence">
+                          {{plan.cadenceLabel}}
                         </span>
                       {{/if}}
-                    </span>
-                  {{/if}}
-
-                  {{#if plan.perDayLabel}}
-                    <span class="btcpay-plan__per-day">
-                      {{plan.perDayLabel}}
                     </span>
                   {{/if}}
                 </span>

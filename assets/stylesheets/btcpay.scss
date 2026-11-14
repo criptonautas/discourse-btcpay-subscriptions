@@ -312,16 +312,20 @@
   }
 
   &__price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35em;
     margin-top: auto;
     padding-top: 0.5em;
-    text-align: center;
     white-space: nowrap;
   }
 
   &__name {
-    font-size: var(--font-up-1);
-    font-weight: 600;
-    line-height: 1.2;
+    font-size: var(--font-up-3);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     color: var(--primary);
   }
 
@@ -344,22 +348,27 @@
   }
 
   &__amount {
-    font-size: var(--font-up-3);
+    font-size: var(--font-up-2);
     font-weight: 600;
     line-height: 1;
     letter-spacing: -0.01em;
     color: var(--primary);
   }
 
-  &__interval,
-  &__description,
+  &__cadence,
   &__note {
     color: var(--primary-medium);
     font-size: var(--font-down-1);
   }
 
+  // A centered column whose lines share one left edge
   &__description {
-    line-height: 1.5;
+    width: 100%;
+    max-width: 36ch;
+    margin: 0.5em auto 0;
+    color: var(--primary-high);
+    font-size: var(--font-0);
+    line-height: 1.55;
 
     > :first-child {
       margin-top: 0;
@@ -370,15 +379,8 @@
     }
   }
 
-  &__per-day {
-    margin-top: -0.5em;
-    text-align: center;
-    color: var(--primary-medium);
-    font-size: var(--font-down-2);
-  }
-
   &__trial {
-    align-self: flex-start;
+    align-self: center;
     padding: 0.15em 0.5em;
     border-radius: var(--d-border-radius, 0.25em);
     background: var(--tertiary-low);
@@ -387,6 +389,7 @@
   }
 
   &__note {
+    text-align: center;
     color: var(--danger);
   }
 }
@@ -396,6 +399,7 @@
 .btcpay-checkout__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5em;
 }
 
