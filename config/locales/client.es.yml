@@ -27,11 +27,12 @@ es:
 
       checkout:
         closed: "Nuestros abonos (tickets) están pausados por el momento. Avisamos en la comunidad cuando vuelvan a estar disponibles."
-        per_day: "%{amount} %{currency} por día"
+        per_day: "%{amount} por día"
+        cadence: "%{interval} (%{per_day})"
         intervals:
-          monthly: "mes"
-          quarterly: "trimestre"
-          yearly: "año"
+          monthly: "mensual"
+          quarterly: "trimestral"
+          yearly: "anual"
           lifetime: "de por vida"
         trial_days:
           one: "prueba de %{count} día"

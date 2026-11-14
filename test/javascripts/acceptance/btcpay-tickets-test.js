@@ -52,21 +52,23 @@ acceptance("BTCPay | Tickets page", function (needs) {
       .hasText("10 USD");
   });
 
-  test("translates BTCPay's billing interval", async function (assert) {
+  test("names the interval with a rough per-day price", async function (assert) {
     await visit("/tickets");
 
     assert
-      .dom(".btcpay-plan:first-of-type .btcpay-plan__interval")
-      .hasText("/ month");
+      .dom(".btcpay-plan:first-of-type .btcpay-plan__cadence")
+      .hasText("monthly (<1 per day)");
+    assert
+      .dom(".btcpay-plan:last-of-type .btcpay-plan__cadence")
+      .hasText("lifetime", "lifetime has no per-day price");
   });
 
-  test("shows a rough per-day price, none for lifetime", async function (assert) {
+  test("gives each plan name a heading role", async function (assert) {
     await visit("/tickets");
 
     assert
-      .dom(".btcpay-plan:first-of-type .btcpay-plan__per-day")
-      .hasText("<1 USD per day");
-    assert.dom(".btcpay-plan__per-day").exists({ count: 1 });
+      .dom(".btcpay-plan:first-of-type [role='heading']")
+      .hasText("Premium");
   });
 
   test("shows the checkout button", async function (assert) {

@@ -27,11 +27,12 @@ en:
 
       checkout:
         closed: "Our tickets are paused for now. We'll announce it in the community when they're available again."
-        per_day: "%{amount} %{currency} per day"
+        per_day: "%{amount} per day"
+        cadence: "%{interval} (%{per_day})"
         intervals:
-          monthly: "month"
-          quarterly: "quarter"
-          yearly: "year"
+          monthly: "monthly"
+          quarterly: "quarterly"
+          yearly: "yearly"
           lifetime: "lifetime"
         trial_days:
           one: "%{count}-day trial"
