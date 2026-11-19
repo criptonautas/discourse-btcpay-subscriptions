@@ -200,16 +200,21 @@
   margin: 1.5em 0;
 }
 
-// Side by side on desktop, one column on a phone
+// Side by side on desktop, one column on a phone; cards keep a readable
+// width and the pair sits centered instead of filling the page.
 .btcpay-plans {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  gap: 1em;
-  margin: 0 0 1.25em;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 24rem));
+  justify-content: center;
+  gap: 1.25em;
+  margin: 0 0 1.5em;
   padding: 0;
   border: none;
 
+  // Floated, the legend becomes a grid item, so it can span and align
   &__legend {
+    float: inline-start;
+    width: 100%;
     grid-column: 1 / -1;
     text-align: end;
     padding: 0;
@@ -225,7 +230,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1.25em 1.5em 1.5em;
+
+  // Core styles a label as flex-start, which shrinks the body to the left
+  align-items: stretch;
+  padding: 2em 1.5em;
   border: 1px solid var(--primary-low);
   border-radius: 0.75em;
   background: var(--secondary);
@@ -247,7 +255,6 @@
   &.is-selected {
     border-color: var(--tertiary);
     background: var(--tertiary-very-low, var(--secondary));
-    box-shadow: inset 0 0 0 1px var(--tertiary);
   }
 
   &.is-current {
